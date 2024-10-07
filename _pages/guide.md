@@ -71,6 +71,7 @@ Code blocks defining an object (like a pipeline) should have line breaks around 
 There should be one space around every operator (like pipes "%>%", +, -, /, =, %in%). 
 
 > ✅: `sum_vector = 1 + 3`
+
 > ✅: `ggplot(aes(x = category, y = percent))`
 
 > 🚫: `mean(x, na.rm=TRUE)`
@@ -80,6 +81,7 @@ If a function call is longer than about 88 characters, it should be broken up in
 Parentheses around function calls should have no spaces surrounding them.
 
 > ✅: `max(x)`
+
 > 🚫: `max ( y )`
 
 But parentheses for control statements (like `if`) and for bracketing statements (like `(1 + 1) / 10`) should have surrounding spaces.
@@ -107,6 +109,7 @@ Over and above the visual conventions, much could be said about how to choose go
 However, this is a more difficult task than it might sound like, especially in a larger project where a variable could have 4 or 5 different relevant attributes. The strong recommendation here is to favor understandability and unambiguousness, even at the cost of length. A long variable name is annoying, but a confusing variable name is useless—or  downright dangerous. 
 
 > ✅: tract_geoid_2022
+
 > 🚫: trc_GEOID_22
 
 Using ad-hoc abbreviations in variable names is doubly problematic because it's both difficult to understand (What in the world does `trc` mean? Can you guarantee that everyone reading the code will know what that means?) and easy to mistype (Which letters are left out? If you miss a letter, will you be able to tell easily?). If in doubt, spell it out.
@@ -114,7 +117,9 @@ Using ad-hoc abbreviations in variable names is doubly problematic because it's 
 If you have a series of variables that are thematically related, give them the same structure so the reader has a handle on what they are.
 
 > ✅: tract_geoid_2022, tract_geoid_2023, tract_geoid_2024
+
 > ✅: geoid_tract_2022, geoid_county_2022, geoid_state_2022
+
 > 🚫: tract_geoid_2022, tract_2023_geoid_, geoid_tract_2024
 
 The same conventions apply for naming files, as well (either for script names or for outputs). You should **not** use spaces in filenames, as such names cannot be easily referenced in command line and for git. Using hyphens as a separator in filenames is an option that's not possible in R. Again, be consistent.
