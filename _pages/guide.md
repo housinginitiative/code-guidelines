@@ -121,12 +121,6 @@ The same conventions apply for naming files, as well (either for script names or
 
 > Be aware that Windows *still* has a low character-length limit for filenames, so don't go too wild with deeply-nested directory structures or very long filenames.
 
-## Miscellaneous
-
-### Dates
-
-When using dates in variable names or filenames, always use the [ISO 8601](https://xkcd.com/1179/) standard. This way, when you sort by name the names will also be sorted chronologically. Only use dates in non-ISO 8601 formats in code when needing to write communicative material, like in body text or plot labels (and in this case, write out the month names so that it's unambiguous internationally). 
-
 ## Commenting
 
 Commenting your code is an indispensable requirement to make it legible and understandable. 
@@ -141,25 +135,56 @@ An important case: if you're changing the number of observations in your data, o
 
 > Use the cmd/ctrl-shift-c shortcut in RStudio to toggle a line (or block) of code in and out of comment status.
 
+## Miscellaneous
+
+### Dates
+
+When using dates in variable names or filenames, always use the [ISO 8601](https://xkcd.com/1179/) standard. This way, when you sort by name the names will also be sorted chronologically. Only use dates in non-ISO 8601 formats in code when needing to write communicative material, like in body text or plot labels (and in this case, write out the month names so that it's unambiguous internationally). 
+
+### Security
+
+Do **not** expose any private information in your code. This includes any PII (personally identifiable information) and any API keys or passwords you may use for 3rd-party services.
+
+If you need to refer to PII (e.g., to reference a specific address), use an anonymous key instead (e.g., a participant ID). 
+
+API keys should be stored in your .REnviron file and be called from there. Packages like `tidycensus` will automatically call your key from the .REnviron file. API keys are private information and you don't want others to potentially misuse your API key.
 
 # Project and script organization
 
+We've discussed some general guidelines for clearer code, but how you organize your project files is also important. Below are some considerations.
+
 ## Version control
 
+If the project you are working on has a Github repository, use it. Speak with your colleagues on the project beforehand to make sure how you plan to organize your files within the repository makes sense, and to ascertain the best way for you to manage your contributions (e.g., using branches named in a certain way). 
 
+If your project does not yet have a repository, there probably should be one unless it's a very small project or does not include any code. Speak with your colleagues about the structure that makes the most sense for your project.
+
+Unless you're the only one committing to the repo, it is best practice to use git branches, and periodically pull your branch into `main`. Otherwise, you may run into annoying merge conflict issues. [This](https://happygitwithr.com/) is a great resource for using git/GitHub, with special focus on R.
+
+I highly recommend using the [Github Desktop app](https://desktop.github.com/download/) to manage your interface with git, rather than the built-in RStudio interface which leaves much to be desired. (Unless you prefer command-line!) 
 
 ## Ordering and organizing
 
+How exactly your scripts should be organized will vary greatly by project. I would recommend regularly checkin in with your colleagues about project directory structure management. Usually this is not considered a particularly exciting topic, but good organization that adapts to changing circumstances is well worth putting in the occasional time. Remember that projects often do not go away when scheduled! Someone (probably you) may well need to revive the project in 6/10/24 months. The less you have to reconstruct the project then, the better.
+
+One generally applicable principle, however, is to keep major steps in the data science pipeline (cleaning, EDA, analysis, modeling, communication) separate. In a smaller project, this might be one script or RMD per step; in a larger project, each step may have multiple scripts organized in directories. 
+
+Remember that the data that you input/output from your scripts should be well organized as well, on the project's Box folder. Keeping a separate readme in the project data folder describing each of the datasources as well as the intermediate outputs is **highly** recommended. The readme in the project repo should also have a link to the Box data folder.
 
 ## Scripts vs RMDs
+
+Generally, if what you want to do is communicate some aspect of our data (EDA, or a polished analysis) to a larger audience (the rest of your team or to the public), you want to write in an RMD (aka Markdown, or Quarto if you use the newer format). 
+
+However, for material that is not explicitly communicative in nature, I recommend using regular .R scripts instead. This is because RMD files are paradoxically less legible and more clunky to work with if you're interested purely in the code (for example, RMDs will not have syntax highlighting when viewed on Github).
 
 
 # Pitfalls and how to avoid them
 
 ## Know your data!
 
-## Dirty environments
+## Verify before you trust
 
+## Dirty environments
 
 ## NA handling
 
@@ -177,11 +202,16 @@ If you use the shortcut cmd-return (or ctrl-enter), RStudio will run the stateme
 
 The shortcut cmd/ctrl-shift-0 will restart R (and clear your environment) right where you are without restarting RStudio. You should do this every once in a while to avoid nasty bugs from dirty environments.
 
-
 ## Tidylog
 
+This one is a must. This package will print out a log of most tidyverse operations in the console whenever you run them. Did this `mutate` operation introduce NAs? How many rows were dropped when I `filter`ed? This this `left_join` introduce duplicates? This is information that you *need* to know, and tidylog will helpfully serve it to you, saving you very tedious repeated work.
+
+If there are issues with using the regular CRAN version of tidylog, try the development version linked at the [package git repo](https://github.com/elbersb/tidylog).
 
 ## Janitor
 
+This package provides a true wealth of very useful functions, including automatic variable name cleaning, deduplication management, and creating easy summary tables. I recommend reading through all of the functions [here](https://sfirke.github.io/janitor/index.html).
 
-## Skim
+## Skimr
+
+[This package](https://github.com/ropensci/skimr) provides the `skim` function, which is one of the best quick EDA tools available for R. I recommend running this function whenever you read in new raw data.
