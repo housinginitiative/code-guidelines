@@ -35,6 +35,22 @@ This guide was written by Chi-Hyun Kim and last updated October 7, 2024.
 
 # Good code
 
+Just now, I described the purpose of this guide as helping you "create code that is clear, legible, and adaptable". What does this mean? 
+
+When we perform research, we want the results to be reliable and replicable. This is actually true for any important task, but is especially important in our research: we want to present conclusions and recommendations that are based on transparent and thoughtful analysis of data. We do *not* want policy decisions to be influenced by error-laden conclusions or be muddied by sloppy procedures.
+
+Good code means code that code that does exactly this. It should lead step-by-step in a way that any careful reader can understand, from data source to the communication of the results. 
+
+Think back to the hypothetical scenario from the top of the page, and think about what would make your life (and your colleagues' lives) easier or more difficult.
+
+Here are some important heuristics to keep in mind throughout a project. If your code reflects these qualities, your life is likely to be much easier down the road.
+
+- Code should be **universal**: you, and anyone else with access to the data, should be able to run your code out-of-the-box without tinkering or having to complete any procedure more complex than downloading needed packages.
+- Code should be **replicable**: when you (or anyone) runs the code, the results should be the same.
+- Code should be **legible**: it should be physically easy for anyone to read your code.
+- Code should be **clear**: your code should not be ambiguous (either to the computer or to a human). To a human, the purpose of your code should be easily apparent.
+
+From this point, I describe specific guideline and helpful tips to help you more easily achieve these goals.
 
 # Basics
 
